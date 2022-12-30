@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="initial-scale=1.0, width=device-width">
+    <link href="/favicon.ico"
+          rel="icon shortcut"
+          type="image/x-icon">
+    <link rel="apple-touch-icon"
+          href="/favicon.ico">
+    <title>Happy New Year!</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Charm">
+    <style type="text/css">
+        body {
+            margin: 0px;
+            overflow: hidden;
+            font-family: "Charm", sans-serif;
+            color: white;
+            background: #000;
+        }
+
+        .background {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            width: 80vw;
+            height: 80vh;
+            background-image: url('./2.gif');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -40vw;
+            margin-top: -40vh;
+        }
+
+        .title {
+            width: 100%;
+            margin-top: 5vh;
+            text-align: center;
+            font-size: 5em;
+        }
+
+        .name {
+            position: absolute;
+            bottom: 5vh;
+            top: auto;
+
+            width: 100%;
+            text-align: center;
+            font-size: 3.5em;
+
+            animation: color-change 1s infinite;
+        }
+
+        .message {
+            margin-top: 5vh;
+
+            width: 100%;
+            text-align: center;
+            font-size: 2.5em;
+            font-style: italic;
+            font-weight: bold;
+            -webkit-text-stroke: #000 .5px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .title {
+                margin-top: 2vh;
+                font-size: 3em;
+            }
+
+            .name {
+                font-size: 2em;
+                bottom: 10vh;
+            }
+
+            .content {
+                width: 100vw;
+                margin-left: -50vw;
+            }
+        }
+
+
+        .linear-wipe {
+            text-align: center;
+
+            background: linear-gradient(to right, #FFF 20%, #FF0 40%, rgba(255, 255, 0, 0.815) 60%, #FFF 80%);
+            background-size: 200% auto;
+
+            color: #000;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: shine 1.5s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+
+        @keyframes color-change {
+            0% {
+                color: red;
+            }
+
+            50% {
+                color: blue;
+            }
+
+            100% {
+                color: red;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <a type="button"
+       style="position: absolute; top: 5px; left: 5px; "
+       href="./create.html">Create Your Own Greeting</a>
+    <div class="background">
+        <div class="content">
+            <h1 id="title"
+                class="title linear-wipe"></h1>
+
+            <p id="msg"
+               class="message linear-wipe"></p>
+            <h2 id="name"
+                class="name"></h2>
+        </div>
+    </div>
+
+
+    <script>
+        const greets = ["Happy New Year 2023!", "සුභ අලුත් අවුරුද්දක් වේවා 2023!"];
+        var title;
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        document.getElementById("name").innerText = `'${params.name}'`;
+        if (params.msg)
+            document.getElementById("msg").innerText = `'${params.msg}'`;
+        if (params.title) {
+            title = params.title;
+        } else {
+            if (params.q && params.q >= 0 && params.q < 3) {
+                title = greets[params.q];
+            } else {
+                title = greets[0];
+            }
+        }
+        document.getElementById("title").innerText = title;
+    </script>
+
+</body>
+
+</html>
