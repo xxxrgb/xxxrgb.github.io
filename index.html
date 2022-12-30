@@ -156,7 +156,8 @@
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
-        document.getElementById("name").innerText = `'${params.name}'`;
+        if (params.name)
+            document.getElementById("name").innerText = `'${params.name}'`;
         if (params.msg)
             document.getElementById("msg").innerText = `'${params.msg}'`;
         if (params.title) {

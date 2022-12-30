@@ -47,6 +47,9 @@
     <button type="button"
             onclick="copy()"> Copy to Clipboard</button>
 
+    <a type="button"
+       id="linkurl"> Open link in new tab</a>
+
 
 
     <script>
@@ -57,7 +60,7 @@
         });
 
         var getUrl = window.location;
-        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var baseUrl = getUrl.protocol + "//" + getUrl.host;
 
         title += baseUrl;
 
@@ -69,6 +72,7 @@
             title += `&name='${params.name}'`;
 
         document.getElementById("link").value = title;
+        document.getElementById("linkurl").href = title;
 
         function copy() {
             var copyText = document.getElementById("link");
